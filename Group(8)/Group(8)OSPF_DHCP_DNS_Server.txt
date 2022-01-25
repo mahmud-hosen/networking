@@ -1,0 +1,74 @@
+//ospf
+
+
+en 
+conf t
+int fa0/2
+ip address 192.168.30.2 255.255.255.192
+no shut
+exit
+
+int fa0/3
+ip address 192.168.30.3 255.255.255.192
+no shut
+exit
+
+router ospf 1
+network 192.168.30.0 0.0.0.63 area 1
+network 192.168.40.0 0.0.0.63  area 1
+network 192.168.10.0 0.0.0.3  area 1
+exit
+
+
+
+//DHCP
+
+
+
+
+
+en
+conf t
+int fa0/0
+ip address 192.168.50.254 255.255.255.0
+no shut
+exit
+
+ip dhcp pool d
+network 192.168.50.0 255.255.255.0
+defalt-router 192.168.50.254
+dns-server 8.8.8.8
+exit
+
+
+ip dhcp excluded-addresss 192.168.50.3 192.168.50.20
+exit
+wr
+
+
+//Server 
+
+
+
+en 
+conf t
+int fa2/0
+ip address 192.168.70.4 255.255.255.192
+no shut
+exit
+
+int fa3/0
+ip address 192.168.70.5 255.255.255.192
+no shut
+exit
+
+int fa0/0
+ip address 192.168.40.4 255.255.255.192
+no shut
+exit
+
+
+int fa1/0
+ip address 192.168.40.5 255.255.255.192
+no shut
+exit

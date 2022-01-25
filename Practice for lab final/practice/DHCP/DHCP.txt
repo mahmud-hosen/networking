@@ -1,0 +1,20 @@
+
+
+
+en
+conf t
+int fa2/0
+ip address 192.168.50.254 255.255.255.0
+no shut
+exit
+
+ip dhcp pool d
+network 192.168.50.0 255.255.255.0
+defalt-router 192.168.50.254
+dns-server 8.8.8.8
+exit
+
+
+ip dhcp excluded-addresss 192.168.50.3 192.168.50.20
+exit
+wr

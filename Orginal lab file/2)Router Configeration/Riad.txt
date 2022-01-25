@@ -1,0 +1,44 @@
+<<Router 1>>
+
+en
+conf t
+int fa0/0
+ip address 192.168.10.1 255.255.255.252
+no shut
+exit
+
+int fa1/0
+ip address 192.168.11.1 255.255.255.224
+no shut
+exit
+
+<<Router 2>>
+
+en
+conf t
+int fa0/0
+ip address 192.168.10.2 255.255.255.252
+no shut
+exit
+
+int fa1/0
+ip address 192.168.20.1 255.255.255.252
+no shut
+exit
+
+int fa2/0
+ip address 192.168.12.1 255.255.255.240
+no shut
+exit
+
+<<Router 3>>
+en conf t
+int fa0/0
+ip address 192.168.20.2 255.255.255.252
+no shut
+exit
+
+int fa1/0
+ip address 192.168.20.3 255.255.255.252
+no shut
+exit

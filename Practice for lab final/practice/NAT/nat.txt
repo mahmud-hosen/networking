@@ -1,0 +1,91 @@
+same switch(Device ) = croper cross
+
+
+//Gatway
+
+en 
+conf t
+
+int f0/0
+ip address 30.0.0.1  255.0.0.0 
+no shut
+exit
+
+
+int f0/1 
+ip address 192.168.1.1  255.255.255.0 
+no shut
+exit 
+
+int f0/0
+ip route 0.0.0.0 0.0.0.0
+exit
+
+access-list 1 permit 192.168.1.0  0.0.0.255
+ip nat pool test 60.0.0.1  netmask 255.0.0.0
+ip nat inside source list 1 pool test overload
+ 
+
+interface fastEthernet 0/1
+ip nat inside
+
+interface fastEthernet 0/0
+ip  nat outside
+exit
+
+
+
+
+
+ 
+
+/// ISP Router
+
+
+
+en 
+conf t
+
+int f0/0
+ip address 20.0.0.1   255.0.0.0 
+no shut
+exit
+
+
+
+int f0/1
+ip address 30.0.0.2  255.0.0.0 
+no shut
+exit
+
+int f0/0
+ip route 0.0.0.0 0.0.0.0
+exit
+
+
+
+/////// again getway 
+
+
+access-list 1 permit 192.168.1.0  0.0.0.255
+ip nat pool test 60.0.0.1  netmask 255.0.0.0
+ip nat inside source list 1 pool test overload
+ 
+
+interface fastEthernet 0/1
+ip nat inside
+
+interface fastEthernet 0/0
+ip  nat outside
+exit
+
+
+
+
+
+
+
+
+
+
+

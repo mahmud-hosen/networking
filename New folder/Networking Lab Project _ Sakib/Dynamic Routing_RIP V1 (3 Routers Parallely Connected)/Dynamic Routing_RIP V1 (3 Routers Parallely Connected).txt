@@ -1,0 +1,74 @@
+      +++RIP(Routing Information Protocol) Version 1+++
+      _________________________________________________
+
+Router 1:
+---------
+
+en
+conf t
+int fa2/0
+ip address 192.168.1.1 255.255.255.192
+no shut
+exit
+int fa0/0
+ip address 192.168.10.1 255.255.255.252
+no shut
+exit
+int fa1/0
+ip address 192.168.20.1 255.255.255.252
+no shut
+exit
+router rip
+network 192.168.10.0
+network 192.168.20.0
+network 192.168.1.0
+exit
+______________________________________________
+
+Router 2:
+---------
+
+en
+conf t
+int fa2/0
+ip address 192.168.3.1 255.255.255.224
+no shut
+exit
+int fa0/0
+ip address 192.168.20.2 255.255.255.252
+no shut
+exit
+int fa1/0
+ip address 192.168.30.2 255.255.255.252
+no shut
+exit
+router rip
+network 192.168.30.0
+network 192.168.20.0
+network 192.168.3.0
+exit
+
+____________________________________________
+
+Router 3:
+---------
+
+en
+conf t
+int fa2/0
+ip address 192.168.2.1 255.255.255.240
+no shut
+exit
+int fa0/0
+ip address 192.168.30.1 255.255.255.252
+no shut
+exit
+int fa1/0
+ip address 192.168.10.2 255.255.255.252
+no shut
+exit
+router rip
+network 192.168.10.0
+network 192.168.30.0
+network 192.168.2.0
+exit

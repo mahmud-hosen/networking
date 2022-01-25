@@ -1,0 +1,64 @@
+//Router1
+
+en
+conf t
+
+int f1/0
+ip address 192.102.10.1 255.255.255.252
+no shut
+exit
+
+int f0/0
+ip address 192.102.20.1 255.255.255.224
+no shut
+exit
+
+ip route 192.102.30.0 255.255.255.224 192.102.10.2
+ip route  192.102.50.0 255.255.255.224 192.102.10.2
+exit
+
+
+//Router2
+
+en
+conf t
+
+int fa1/0
+ip address 192.102.10.2 255.255.255.252
+no shut
+exit
+
+int fa0/0
+ip address 192.102.30.1 255.255.255.224
+no shut
+exit
+
+int fa2/0
+ip address 192.102.40.1 255.255.255.252
+no shut 
+exit
+
+ip route 192.102.20.0 255.255.255.224 192.102.10.1
+ip route 192.102.50.0 255.255.255.224 192.102.40.2
+
+exit
+
+//Router3
+
+en
+conf t
+
+int fa1/0
+ip address 192.102.40.2 255.255.255.252
+no shut
+exit
+
+
+int fa0/0
+ip address 192.102.50.1 255.255.255.224
+no shut
+exit
+
+ip route 192.102.30.0 255.255.255.224 192.102.40.1
+ip route 192.102.20.0 255.255.255.224 192.102.40.1
+exit
